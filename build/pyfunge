@@ -1,3 +1,11 @@
 #!/bin/sh
 
-python ../source/main.py $1
+main="../source/main.py"
+
+this=`dirname $0`
+
+path=`pwd`"/"$1
+
+cd $this
+
+python $main $path

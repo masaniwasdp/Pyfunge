@@ -115,10 +115,13 @@ class NumberInput(Operator):
     """
 
     def apply(self, environment):
-        element = get_input_element(environment)
+        while True:
+            element = get_input_element(environment)
 
-        if element.isdigit():
-            environment.get_stack().push(int(element))
+            if element.isdigit():
+                environment.get_stack().push(int(element))
+
+                break
 
 
 class CharInput(Operator):

@@ -14,6 +14,7 @@ class Environment:
         self.__stack = Stack()
         self.__quoting = False
         self.__code = CodeStream(code)
+        self.__input = Queue()
 
     def get_stack(self):
         """ スタックを返す。
@@ -39,6 +40,12 @@ class Environment:
 
         return self.__code
 
+    def get_input(self):
+        """ 入力データのキューを返す。
+        """
+
+        return self.__input
+
 
 class Stack:
     """ スタック。
@@ -61,3 +68,26 @@ class Stack:
         """
 
         return self.__data.pop()
+
+
+class Queue:
+    """ キュー。
+    """
+
+    def __init__(self):
+        self.__data = []
+
+    def __len__(self):
+        return len(self.__data)
+
+    def enqueue(self, element):
+        """ キューへ値を追加する。
+        """
+
+        self.__data.append(element)
+
+    def dequeue(self):
+        """ キューから値を取り出して返す。
+        """
+
+        return self.__data.pop(0)

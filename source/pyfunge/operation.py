@@ -111,31 +111,24 @@ class Value(Operator):
 
 
 class NumberInput(Operator):
-    """ 数値を入力させてスタックへプッシュする命令。
+    """ 入力された数値ひとつをスタックへプッシュする命令。
     """
 
     def apply(self, environment):
-        while True:
-            character = input(">")
+        element = get_input_element(environment)
 
-            if character.isdigit():
-                environment.get_stack().push(int(character))
-
-                break
+        if element.isdigit():
+            environment.get_stack().push(int(element))
 
 
 class CharInput(Operator):
-    """ 文字を入力させてそのASCIIコードをスタックへプッシュする命令。
+    """ 入力された文字ひとつのASCIIコードをスタックへプッシュする命令。
     """
 
     def apply(self, environment):
-        while True:
-            character = input(">")
+        element = get_input_element(environment)
 
-            if len(character) > 0:
-                environment.get_stack().push(ord(character[0]))
-
-                break
+        environment.get_stack().push(ord(element))
 
 
 class NumberPrinter(Operator):
@@ -232,3 +225,20 @@ class Writer(Operator):
         val = environment.get_stack().pop()
 
         environment.get_code().write_char(row, col, chr(val))
+
+
+def get_input_element(environment):
+    """ 入力データのキューからひとつ取り出して返す。
+
+    キューが空なら入力を受け付けてキューに追加する。
+    """
+
+    while True:
+        if len(environment.get_input()) > 0:
+            return environment.get_input().dequeue()
+
+        else:
+            data = input("\npyfunge>")
+
+            for element in data:
+                environment.get_input().enqueue(element)

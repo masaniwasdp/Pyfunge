@@ -2,12 +2,12 @@
 
 set -eu
 
-main="../source/main.py"
+py_main="../source/main.py"
 
-this=`dirname $0`
+this_dir=$(dirname $0)
 
-path=`pwd`"/"$1
+abs_path=$(cd $(dirname $1) && pwd)"/"$(basename $1)
 
-cd $this
+cd $this_dir
 
-python $main $path
+python $py_main $abs_path

@@ -1,10 +1,11 @@
 """ アプリケーションモジュール。
 
-2017/4/16 masaniwa
+Date: 2017/7/7
+Authors: masaniwa
 """
 
-from .environment import Environment
-from .parser import Parser
+from pyfunge.environment import Environment
+from pyfunge.parser import Parser
 
 
 class App:

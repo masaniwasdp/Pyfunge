@@ -1,12 +1,13 @@
 """ 命令モジュール。
 
-2017/4/16 masaniwa
+Date: 2017/7/7
+Authors: masaniwa
 """
 
 from abc import ABC
 from random import randrange
 
-from .codestream import Direction
+from pyfunge.codestream import Direction
 
 
 class Operator(ABC):
@@ -15,6 +16,9 @@ class Operator(ABC):
 
     def apply(self, environment):
         """ 環境に対して命令を実行する。
+
+        Params:
+            environment = 環境。
         """
 
         pass
@@ -25,6 +29,12 @@ class Director(Operator):
     """
 
     def __init__(self, direction):
+        """ 初期化する。
+
+        Params:
+            direction = 方向。
+        """
+
         self.__direction = direction
 
     def apply(self, environment):
@@ -36,6 +46,13 @@ class Selector(Operator):
     """
 
     def __init__(self, direction_a, direction_b):
+        """ 初期化する。
+
+        Params:
+            direction_a = 方向A。
+            direction_b = 方向B。
+        """
+
         self.__direction_a = direction_a
         self.__direction_b = direction_b
 
@@ -104,6 +121,12 @@ class Value(Operator):
     """
 
     def __init__(self, value):
+        """ 初期化する。
+
+        Params:
+            value = 値。
+        """
+
         self.__value = value
 
     def apply(self, environment):
@@ -155,6 +178,12 @@ class Calculater(Operator):
     """
 
     def __init__(self, function):
+        """ 初期化する。
+
+        Params:
+            function = 関数。
+        """
+
         self.__function = function
 
     def apply(self, environment):
@@ -231,9 +260,14 @@ class Writer(Operator):
 
 
 def get_input_element(environment):
-    """ 入力データのキューからひとつ取り出して返す。
+    """ 入力データのキューからひとつ取り出す。
 
     キューが空なら入力を受け付けてキューに追加する。
+
+    Params:
+        environment = 環境。
+
+    Returns: 取り出した値。
     """
 
     while True:

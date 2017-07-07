@@ -1,11 +1,11 @@
 """ パーサモジュール。
 
-2017/4/16 masaniwa
+Date: 2017/7/7
+Authors: masaniwa
 """
 
-from .codestream import Direction
-
-from . import operation
+from pyfunge import operation
+from pyfunge.codestream import Direction
 
 
 class Parser:
@@ -42,7 +42,13 @@ class Parser:
 
     @classmethod
     def parse(cls, character, quoting):
-        """ 文字を命令にパースして返す。
+        """ 文字を命令にパースする。
+
+        Params:
+            character = パース対象の文字。
+            quoting = 文字を文字とする場合はTrue。文字を命令とする場合はFalse。
+
+        Returns: パースした命令。
         """
 
         if character == "\"":

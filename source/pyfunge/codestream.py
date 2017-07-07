@@ -1,6 +1,7 @@
 """ コードモジュール。
 
-2017/4/16 masaniwa
+Date: 2017/7/7
+Authors: masaniwa
 """
 
 from enum import Enum
@@ -11,6 +12,12 @@ class CodeStream:
     """
 
     def __init__(self, code):
+        """ 初期化をする。
+
+        Params:
+            code = Befungeのコード。
+        """
+
         self.__code = code.split("\n")
 
         self.__initialize()
@@ -37,6 +44,9 @@ class CodeStream:
 
     def change_direction(self, direction):
         """ コードを読み取る方向を変える。
+
+        Params:
+            direction = 読み取る方向。
         """
 
         if direction == Direction.right:
@@ -67,13 +77,24 @@ class CodeStream:
         self.__continuation = False
 
     def read_char(self, row, col):
-        """ コード上の座標の文字を返す。
+        """ コード上の文字を読む。
+
+        Params:
+            row = 行。
+            col = 列。
+
+        Returns: 読み取った文字。
         """
 
         return self.__code[row][col]
 
     def write_char(self, row, col, character):
-        """ コード上の座標の文字を書き換える。
+        """ コード上の文字を書き換える。
+
+        Params:
+            row = 行。
+            col = 列。
+            character = 書き換える文字。
         """
 
         before = self.__code[row][:col]
@@ -109,7 +130,14 @@ class CodeStream:
 
     @classmethod
     def __circulate(cls, number, lower, upper):
-        """ 数を範囲内で循環させて返す。
+        """ 数を範囲内で循環させる。
+
+        Params:
+            number = 数。
+            lower = 数の下限。
+            upper = 数の上限。
+
+        Returns: 循環させた数。
         """
 
         if lower <= number <= upper:

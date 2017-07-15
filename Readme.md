@@ -10,13 +10,13 @@ Befungeの処理系です。
 本来のBefunge-93と違い、ソースコードのサイズは80桁25行に制限されていませんが、完全な長方形または正方形にしなければなりません。
 
 ## 依存
-+ [Python3.6.0](https://www.python.org)
++ [Python3.6.1](https://www.python.org)
 
 ## 実行
 
 ``` bash
 $ cd ~/Pyfunge
-$ build/pyfunge [path]
+$ python source/main.py [path]
 ```
 
 + `path`: Befunge-93のソースコードのパスです。

@@ -1,25 +1,23 @@
 """ 環境モジュール。
 
-Date: 2017/7/15
+Date: 2017/7/30
 Authors: masaniwa
 """
-
-from typing import List, Sized # flake8: noqa
 
 from pyfunge.codestream import CodeStream
 
 
-class Stack(Sized):
+class Stack:
     """ スタック。
     """
 
-    def __init__(self) -> None:
-        self.__data: List[int] = []
+    def __init__(self):
+        self.__data = []
 
-    def __len__(self) -> int:
+    def __len__(self):
         return len(self.__data)
 
-    def push(self, element: int) -> None:
+    def push(self, element):
         """ スタックへ値をプッシュする。
 
         Params:
@@ -28,7 +26,7 @@ class Stack(Sized):
 
         self.__data.append(element)
 
-    def pop(self) -> int:
+    def pop(self):
         """ スタックから値をポップする。
 
         Returns: ポップした値。
@@ -43,17 +41,17 @@ class Stack(Sized):
         return self.__data.pop()
 
 
-class Queue(Sized):
+class Queue:
     """ キュー。
     """
 
-    def __init__(self) -> None:
-        self.__data: List[str] = []
+    def __init__(self):
+        self.__data = []
 
-    def __len__(self) -> int:
+    def __len__(self):
         return len(self.__data)
 
-    def enqueue(self, element: str) -> None:
+    def enqueue(self, element):
         """ キューへ文字を追加する。
 
         Params:
@@ -64,7 +62,7 @@ class Queue(Sized):
 
         self.__data.append(element)
 
-    def dequeue(self) -> str:
+    def dequeue(self):
         """ キューから文字を取り出す。
 
         Returns: 取り出した文字。
@@ -83,7 +81,7 @@ class Environment:
     """ 環境。
     """
 
-    def __init__(self, code: str) -> None:
+    def __init__(self, code):
         """ 初期化する。
 
         Params:
@@ -93,10 +91,9 @@ class Environment:
             RuntimeError コードの形が正しくない場合。
         """
 
-        assert len(code) > 0
-
         self.__stack = Stack()
         self.__input = Queue()
+
         self.__quoting = False
 
         try:
@@ -105,7 +102,7 @@ class Environment:
         except RuntimeError as e:
             raise RuntimeError("The code was wrong format.") from e
 
-    def get_stack(self) -> Stack:
+    def get_stack(self):
         """ スタックを得る。
 
         Returns: スタック。
@@ -113,7 +110,7 @@ class Environment:
 
         return self.__stack
 
-    def get_quoting(self) -> bool:
+    def get_quoting(self):
         """ コードの文字を命令とするかスタックへのプッシュとするかどうかを得る。
 
         Returns: 命令とする場合はTrue。プッシュとする場合はFalse。
@@ -121,7 +118,7 @@ class Environment:
 
         return self.__quoting
 
-    def set_quoting(self, value: bool) -> None:
+    def set_quoting(self, value):
         """ コードの文字を命令とするかスタックへのプッシュとするかどうか設定する。
 
         Params:
@@ -130,7 +127,7 @@ class Environment:
 
         self.__quoting = value
 
-    def get_code(self) -> CodeStream:
+    def get_code(self):
         """ コードを得る。
 
         Returns: コード。
@@ -138,7 +135,7 @@ class Environment:
 
         return self.__code
 
-    def get_input(self) -> Queue:
+    def get_input(self):
         """ 入力データのキューを得る。
 
         Returns: 入力データのキュー。

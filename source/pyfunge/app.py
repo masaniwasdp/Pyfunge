@@ -1,6 +1,6 @@
 """ アプリケーションモジュール。
 
-Date: 2017/7/14
+Date: 2017/7/31
 Authors: masaniwa
 """
 
@@ -12,7 +12,7 @@ class App:
     """ アプリケーション。
     """
 
-    def __init__(self, path: str) -> None:
+    def __init__(self, path):
         """ 初期化する。
 
         Params:
@@ -26,7 +26,7 @@ class App:
         with open(path, "r") as code:
             self.__environment = Environment(code.read())
 
-    def run(self) -> None:
+    def run(self):
         """ アプリケーションを実行する。
 
         Throws:
@@ -37,6 +37,9 @@ class App:
             quoting = self.__environment.get_quoting()
 
             operator = parse(character, quoting)
+
+            if operator is None:
+                raise RuntimeError("Failed to parse the code.")
 
             operator.apply(self.__environment)
 

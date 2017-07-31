@@ -1,28 +1,22 @@
 """ パーサモジュール。
 
-Date: 2017/7/13
+Date: 2017/7/31
 Authors: masaniwa
 """
 
 from pyfunge import operation
 from pyfunge.codestream import Direction
-from pyfunge.operation import Operator
 
 
-def parse(character: str, quoting: bool) -> Operator:
+def parse(character, quoting):
     """ 文字を命令にパースする。
 
     Params:
         character = パース対象の文字。
         quoting = 文字を文字とする場合はTrue。文字を命令とする場合はFalse。
 
-    Returns: パースした命令。
-
-    Throws:
-        RuntimeError 文字をパースできなかった場合。
+    Returns: パースした命令。パースできなかった場合はNone。
     """
-
-    assert len(character) == 1
 
     if character == "\"":
         return operation.Quoter()
@@ -33,13 +27,13 @@ def parse(character: str, quoting: bool) -> Operator:
     if character.isdigit():
         return operation.Value(int(character))
 
-    if character not in operations:
-        raise RuntimeError("The character isn't an operator.")
+    if character not in OPERATIONS:
+        return None
 
-    return operations[character]
+    return OPERATIONS[character]
 
 
-operations = {
+OPERATIONS = {
         "<": operation.Director(Direction.left),
         ">": operation.Director(Direction.right),
         "^": operation.Director(Direction.up),

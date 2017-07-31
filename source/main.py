@@ -1,6 +1,6 @@
 """ メインエントリ。
 
-Date: 2017/7/15
+Date: 2017/7/31
 Authors: masaniwa
 """
 
@@ -8,12 +8,12 @@ from sys import argv
 
 from pyfunge.app import App
 
-usage = "Usage: [path]"
+USAGE = "Usage: [path]"
 
 
 def main():
     if len(argv) < 2:
-        print(usage)
+        print(USAGE)
 
         return
 
@@ -26,7 +26,7 @@ def main():
     except OSError as e:
         print(e.args[1])
 
-    except Exception as e:
+    except RuntimeError as e:
         print(e)
 
 
